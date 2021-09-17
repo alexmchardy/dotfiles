@@ -38,3 +38,7 @@ function tip {
 function weather() {
     curl http://wttr.in
 }
+
+function md {
+  markdown $@ | lynx -stdin;
+}
