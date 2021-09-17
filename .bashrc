@@ -3,6 +3,11 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth
@@ -14,28 +19,12 @@ export PROMPT_COMMAND='history -a'
 # add date / time to history entries
 export HISTTIMEFORMAT='%b %d %H:%M '
 
-export EDITOR=nvim
-export GIT_EDITOR=nvim
-export SVN_EDITOR=nvim
+export EDITOR=vim
+export GIT_EDITOR=vim
+export SVN_EDITOR=vim
 
-# Set pager to vim and alias less to it for good measure
-if [[ `which nvimpager` ]]
-then
-  export PAGER=$(which nvimpager)
-else
-  export PAGER=$HOME/bin/vimpager
-fi
-# Set the BAT_PAGER to less to allow tools like delta to work properly
-export BAT_PAGER=less
-# Set the man page viewer to neovim
-# export MANPAGER="nvim '+set background=dark' '+set ft=man' -"
-#alias less=$PAGER
-#alias zless=$PAGER
-
-# Set command line to vi mode and learn to deal with it :)
+# Set command line to vi mode
 set -o vi
-# ^l clear screen
-bind -m vi-insert "\C-l":clear-screen
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -55,11 +44,7 @@ my_time() {
   date +"%T"
 }
 
-
-# Set the default file permissions to 760
-umask 026
-export PATH=$HOME/bin:$PATH
-
+prepend_path "$HOME/bin"
 
 function _update_ps1() {
       PS1="\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
@@ -75,12 +60,6 @@ case "$TERM" in
     ;;
 esac
 
-# Launch starship for fancy cli sugar
-if [[ $(which starship) ]]
-then
-  source <(starship init bash)
-fi
-
 ###############################################################################
 # OS specific settings
 ################################################################################
@@ -90,10 +69,6 @@ function load_darwin {
   # Fix screen
   alias ls='ls -G'
   alias screen="export SCREENPWD=$(pwd); /usr/bin/screen"
-
-  if [ -f /usr/local/bin/hub ]; then
-    alias git='hub'
-  fi
 
   export BREW_PATH="/usr/local";
   if [ -d $BREW_PATH ]; then
@@ -184,29 +159,11 @@ esac
 
 bind "set completion-ignore-case on"
 
-## Set up rbenv if installed
-if [[ -d $HOME/.rbenv ]];
+## Set up yarn if installed
+if [[ -d $HOME/.yarn ]];
 then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
+  prepend_path "$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin"
 fi
-
-## Set up pyenv if installed
-if [[ -d $HOME/.pyenv ]];
-then
-  prepend_path "$HOME/.pyenv/bin"
-  eval "$(pyenv init -)"
-fi
-
-# If go is installed setup the go path
-if [[ `which go` ]];
-then
-  export GOPATH=$HOME/src/go
-  extend_path $GOPATH/bin
-fi
-
-# Set up cargo for rust
-export PATH="$HOME/.cargo/bin:$PATH"
 
 # If we have installed fzf source it!
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
