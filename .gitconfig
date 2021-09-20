@@ -1,36 +1,47 @@
 [color]
-    diff = auto
-    status = auto
-    branch = auto
-    show-branch = always
+  diff = always
+  status = auto
+  branch = auto
+  show-branch = always
 [user]
-    name = Tavis Aitken
-    email = tavisto@tavisto.net
-    signingkey = E618FC96DCDFE023
+	name = Alex McHardy
+	email = amchardy@shutterstock.com
 [core]
-    excludesfile = ~/.gitignore
-    pager = delta
-[interactive]
-    diffFilter = delta --color-only
-
-[delta]
-    features = side-by-side line-numbers decorations
-    whitespace-error-style = 22 reverse
-
-[delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
-[alias]
-    glog = log --graph --oneline --decorate --all
-    vlog = log --date=iso --graph --pretty='%C(auto) %h %d%Cblue %ad%Cred %aN %Creset%s'
-    klog = log --graph --pretty='%C(auto) %h %Cblue %ad %Cred %aN %Creset%s %C(auto)%d%Cgreen%G? %GK'
-    root = !pwd
+	pager = less -FRX --tabs=4
+	editor = vi -u NONE
 [push]
-    default = current
+	default = current
+[alias]
+	ci = checkout-interactive
+	co = checkout
+	st = status
+	lg = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%Creset%C(yellow bold)%d%Creset %s %Cgreen(%cr)%Creset' --date=relative
+	la = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%Creset%C(yellow bold)%d%Creset %s %Cgreen(%cr)%Creset' --date=relative --all
+	lh = "!git lg | head"
+	lhh = "!git lg | head -n20"
+	lah = "!git la | head"
+	lahh = "!git la | head -n20"
+	stashlh = "!git stash list | head"
+	gh = "!open \"$(git remote -v | grep $(git config \"branch.$(git rev-parse --abbrev-ref HEAD).remote\") | grep push | cut -f 2 | cut -d \" \" -f 1 | sed -e \"s|git@\\(.*\\):\\(.*\\)\\(.git\\)$|https://\\1/\\2|\")/tree/$(git rev-parse --abbrev-ref HEAD)\""
+	lastbranch = "!git for-each-ref --sort='-committerdate' refs/heads/ --format='%1B[0;31m%(refname:short)%1B[0;39m %1B[0;90m-%1B[0;39m %1B[0;93m%(authorname)%1B[0;39m %1B[0;91m%(committerdate)%1B[0;39mLINEBREAK%1B[0;90m>%1B[0;39m %(subject)LINEBREAK' | head -n 10 | sed 's/LINEBREAK/\\\n/g'"
+	mylastbranch = "!git for-each-ref --sort='-committerdate' refs/heads/ --format='%1B[0;31m%(refname:short)%1B[0;39m %1B[0;90m-%1B[0;39m %1B[0;93m%(authorname)%1B[0;39m %1B[0;91m%(committerdate)%1B[0;39m LINEBREAK%1B[0;90m>%1B[0;39m %(subject) LINEBREAK%(authorname)' | grep \"$(git config user.name)\" | head -n 10 | sed \"s/$(git config user.name)//g\" | sed 's/LINEBREAK/\\\n/g'"
+	tst = "!echo \"$(git config user.name)\""
+	vd = difftool -y -t vimdiff
+	ghp = subtree push --prefix _gh_pages origin gh-pages
+	coma = commit --amend --no-edit
+	rebcon = rebase --continue
+	fetum = fetch upstream master
+	rebum = rebase upstream/master
+[merge]
+  tool = vscode
+[mergetool "vscode"]
+  cmd = code --wait $MERGED
 [filter "lfs"]
-    clean = git lfs clean %f
-    smudge = git lfs smudge %f
-    required = true
-[commit]
-    gpgSign = true
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[hub]
+	host = github.shuttercorp.net
+[rerere]
+	enabled = true
+	autoupdate = true
