@@ -4,10 +4,10 @@
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Disable the "Are you sure you want to open this application?" dialog
-defaults write com.apple.LaunchServices LSQuarantine -bool false
+#defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # Speed up Mission Control animations
-defaults write com.apple.dock expose-animation-duration -float 0.1
+#defaults write com.apple.dock expose-animation-duration -float 0.1
 
 # Disable "natural" (Lion-style) scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
@@ -33,14 +33,14 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 # Automatically quit printer app once the print jobs complete
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-#Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
-defaults write com.apple.screencapture type -string "png"
+#Save screenshots in JPG format (other options: BMP, GIF, PNG, PDF, TIFF)
+defaults write com.apple.screencapture type -string "jpg"
 
 # Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
 # Enable highlight hover effect for the grid view of a stack (Dock)
-defaults write com.apple.dock mouse-over-hilte-stack -bool true
+#defaults write com.apple.dock mouse-over-hilte-stack -bool true
 
 # Enable spring loading for all Dock items
 defaults write enable-spring-load-actions-on-all-items -bool true
@@ -58,7 +58,7 @@ defaults write NSGlobalDomain KeyRepeat -int 0
 defaults write NSGlobalDomain InitialKeyRepeat -int 12
 
 # Disable auto-correct
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+#defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Display full POSIX path as Finder window title
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
@@ -86,8 +86,8 @@ defaults write com.apple.finder EmptyTrashSecurely -bool false
 defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Field" "@F"
 
 # Disable send and reply animations in Mail.app
-defaults write com.apple.Mail DisableReplyAnimations -bool true
-defaults write com.apple.Mail DisableSendAnimations -bool true
+#defaults write com.apple.Mail DisableReplyAnimations -bool true
+#defaults write com.apple.Mail DisableSendAnimations -bool true
 
 # Enable Dashboard dev mode (allows keeping widgets on the desktop)
 defaults write com.apple.dashboard devmode -bool true
@@ -95,7 +95,7 @@ defaults write com.apple.dashboard devmode -bool true
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
-defaults write com.apple.dock expose-animation-duration -float 0.15 && killall Dock
+#defaults write com.apple.dock expose-animation-duration -float 0.15 && killall Dock
 # enable text selection in quicklook
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
@@ -109,4 +109,4 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 defaults write com.apple.DiskUtility advanced-image-options -bool true
 
-defaults write /Library/Preferences/com.apple.mDNSResponder.plist AlwaysAppendSearchDomains -bool true
+#defaults write /Library/Preferences/com.apple.mDNSResponder.plist AlwaysAppendSearchDomains -bool true

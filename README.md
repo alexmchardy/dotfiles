@@ -26,3 +26,7 @@
     src/dotfiles/bin/brew-setup.sh
     ```
 
+1. Run osx-setup to get some nice default settings
+    ```
+    src/dotfiles/bin/osx-setup.sh
+    ```
