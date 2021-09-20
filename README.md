@@ -6,6 +6,8 @@
 
     https://docs.brew.sh/Installation
 
+    (May have to run `xcode-select --install` to install Xcode Command Line Tools first)
+
 1. Install git
     ```
     brew install git
