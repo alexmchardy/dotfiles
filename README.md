@@ -13,6 +13,10 @@
     brew install git
     ```
 
+1. Generate an SSH key and add it to Github
+
+    https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
 1. Clone this repo
     ```
     git clone git@github.com:alexmchardy/dotfiles.git src/dotfiles
@@ -20,15 +24,15 @@
 
 1. Run movin script to link dotfiles (backing up existing)
     ```
-    src/dotfiles/bin/movin.sh -b
+    ./src/dotfiles/bin/movin.sh -b
     ```
 
 1. Run brew-setup script
     ```
-    src/dotfiles/bin/brew-setup.sh
+    ./src/dotfiles/bin/brew-setup.sh
     ```
 
 1. Run osx-setup to get some nice default settings
     ```
-    src/dotfiles/bin/osx-setup.sh
+    ./src/dotfiles/bin/osx-setup.sh
     ```
