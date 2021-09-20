@@ -1,183 +1,145 @@
 set nocompatible " Enable vim only features
-" Pathogen setup
-call pathogen#infect()
-call pathogen#runtime_append_all_bundles()
-" call pathogen#helptags()
-
-runtime macros/matchit.vim
 
 " Enable loading filetype and indentation plugins
 filetype plugin on
 filetype indent on
-
-set autoread " Reload files that have changed outside of vim
 
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
 " http://items.sjbach.com/319/configuring-vim-right
 set hidden
 
-" Show Whitespace
-" highlight WhiteSpaceEOL ctermbg=darkgreen guibg=lightgreen
-" match WhiteSpaceEOL /^\s*\ \s*\|\s\+$/
-" autocmd WinEnter * match WhiteSpaceEOL /^\s*\ \s*\|\s\+$/
-set listchars=tab:▶-,eol:¬,trail:-
-
 " Allow backspacing over everything
 set backspace=indent,eol,start
-
-" Insert mode completion options
-set completeopt=menu,menuone,preview
-
-" Set the dictionary and add as a completion option
-" Turn this off for now, it's kind of annoying when programming
-" set dictionary+=/usr/share/dict/words
-" set complete-=k complete+=k
 
 " Remember up to 5000 'colon' commmands and search patterns
 set history=5000
 
-" do not put a cr at the end of the file. this will result in headers sent if you do web programming
-set binary noeol
-
 " Turn on syntax highlighting
 syntax enable
+
+" Don't put swap files in the file's directory
+set dir-=.
+
+ " Allow editing of utf-8 files
+set encoding=utf-8
 
 " Set the background to dark
 set background=dark
 
 colorscheme gotham
+"color pablo
+hi MatchParen term=reverse ctermbg=blue
 
-" Make all tabs 4 spaces
-" Make tabs delete properly
-" Make autoindent add 4 spaces per indent level
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab " Convert all tabs
+" Highlight while searching
+set hlsearch
+
+" Use incremental searching
+set incsearch
+
+" Tabs
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
 set smarttab
-set nowrap " No wrapping unless I say so.
 
-set encoding=utf-8 " Allow editing of utf-8 files.
-set iskeyword+=_,$,@,%,#,- " Adds things to the keyword search
+" Autoindent
+set autoindent
+set smartindent
+set nowrap
 
 " When a bracket is inserted, briefly jump to a matching one
 set showmatch
 set matchtime=3 " Match brackets for 3/10th of a sec.
 
-set autoindent " Auto Indent
-set smartindent " Smart Indent
+" file/command completion mode
+set wildmode=longest,list
 
-set mouse=n " Mouse in normal mode
+" case-smart searching
 set ignorecase
 set smartcase
 
-set nohlsearch " Don't Highlight searches
+" Jump 5 lines when running out of the screen
+set scrolljump=5
 
-" set ruler " Always show current positions along the bottom
-" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [POS=%03l,%03v][%p%%]\ [LEN=%L]
+" Indicate jump out of the screen when 3 lines before end of the screen
+set scrolloff=3
 
-" Always show status line, even for one window
-set laststatus=2
+" Show tabs and trailing spaces
+set list
+"set listchars=tab:»·,trail:·
+set listchars=tab:\|·,trail:·
+hi SpecialKey term=NONE ctermfg=4 guifg=#303030
 
 " Explicitly tell Vim that the terminal supports 256 colors
 set t_Co=256
 
-" Scroll when cursor gets within 3 characters of top/bottom edge
-set scrolloff=3
-set scrolljump=5 " Set the scroll jump to be 5 lines
+" ============== Vundle ===============
+set nocompatible               " be iMproved
+filetype off                   " required!
 
-" Show (partial) commands (or size of selection in Visual mode) in the status line
-set showcmd
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" Enable CTRL-A/CTRL-X to work on octal and hex numbers, as well as characters
-set nrformats=octal,hex,alpha
 
-" Remember things between sessions
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" My Bundles here:
 "
-" '20  - remember marks for 20 previous files
-" \"50 - save 50 lines for each register
-" :20  - remember 20 items in command-line history
-" %    - remember the buffer list (if vim started without a file arg)
-" n    - set name of viminfo file
-set viminfo='20,\"50,:20,%,n~/.viminfo
+" original repos on github
+Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'ciaranm/detectindent'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'scrooloose/nerdtree'
+" NERDTree custom mappings to make i and s reuse existing windows
+Plugin 'git://gist.github.com/1588299.git'
+" nerdtree plugin to integrate nerdtree with :grep
+Plugin 'git://gist.github.com/205807.git'
+"NoPlugin 'tsaleh/vim-matchit'
+Plugin 'tpope/vim-fugitive'
+"NoPlugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+"NoPlugin 'tpope/vim-rails.git'
+" vim-scripts repos
+"NoPlugin 'L9'
+"NoPlugin 'FuzzyFinder'
+" Puppet syntax highlighting
+" Plugin 'rodjek/vim-puppet'
+" Fancy status lines
+Plugin 'bling/vim-airline'
+" Solarized Colorscheme
+Plugin 'altercation/vim-colors-solarized'
+" ===== Non Github repos
+" Easy opening of files
+"NoPlugin 'git://git.wincent.com/command-t.git'
+" ...
 
-" Set the default behavior of opening a buffer to use the one already open
-set swb=useopen
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on     " required!
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
 
-" Use menu to show command-line completion (in 'full' case)
-set wildmenu
+" ================ End Vundle ================
 
-" Set command-line completion mode:
-"   Complete longest common string, then list alternatives.
-set wildmode=longest,list,full
-
-" Don't auto wrap anything
-set textwidth=0
-set linebreak " Wrap lines at convenient points
-
-" Set the Grep program to my custom wcgrep
-set grepprg=wcgrep
-
-" Save undo into a folder only if supported
-if exists('+undodir')
-    set undodir=~/.vim/undodir
-    set undofile
-endif
-if exists('+backupdir')
-    set backupdir=~/.vim/backupdir
-    set directory=~/.vim/backupdir
-endif
-
-" Automatically write files out on buffer changes
-set autowrite
-set autowriteall
-
-" Set the column indecator to 80 columns
-" If older vim then highlight in red after 80 columns
-if exists('+colorcolumn')
-    set colorcolumn=80
-else
-    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
-
-" If we are running in macvim mode use a better font.
-if has("gui_running")
-    :set guifont=Source\ Code\ Pro\ for\ Powerline 18
-endif
-
-" Map %% to expand to the current working directory of the active buffer
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " =============================================
 " Plugin Configs
 " =============================================
 
-let g:syntastic_check_on_open=1
-let g:syntastic_echo_current_error=1
-let g:syntastic_enable_signs=1
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_mode_map = { 'mode': 'active',
-            \ 'active_filetypes': ['puppet','python','php', 'javascript'],
-            \ 'passive_filetypes': [] }
-let g:syntastic_python_checkers = ['python', 'flake8']
-let g:syntastic_python_flake8_args = " --ignore F403 "  " Ingore from bla import * errors
-let g:syntastic_puppet_puppetlint_args = " --no-80chars-check "
-let g:syntastic_phpcs_conf = "--standard=PSR2 "
-let g:syntastic_ruby_checkers = ['rubylint', 'rubocop']
-let g:syntastic_javascript_checkers = ['standard']
-let g:syntastic_javascript_jshint_args = '--config /Users/taitken/.jshintrc'
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
 " Airline Config
 let g:airline_detect_paste=1
-let g:airline_theme= "gotham256"
+let g:airline_theme="dark"
 if !exists('g:airline_symbols')
-let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
@@ -187,64 +149,48 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 let g:airline_symbols.whitespace = 'Ξ'
+" Always show status line, even for one window, for powerline/airline
+set laststatus=2
 
-" Ack config to use silver_searcher
-let g:ackprg = 'ag --nogroup --nocolor --column'
+" NERDTree settings
+" start NERDTree with vim
+autocmd vimenter * if !argc() | NERDTree | endif
+" close vim if NERDTree is the only window left
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let NERDTreeShowBookmarks=1
+let NERDTreeWinSize=40
+nnoremap <C-s> :NERDTreeToggle<CR>
 
+" FuzzyFinder settings
+let g:FuzzyFinderOptions = { 'Base':{}, 'Buffer':{}, 'File':{}, 'Dir':{}, 'MruFile':{}, 'MruCmd':{}, 'FavFile':{}, 'Tag':{}, 'TaggedFile':{}}
+let g:FuzzyFinderOptions.Base.ignore_case = 1
+let g:FuzzyFinderOptions.Base.abbrev_map  = {
+      \   '\C^VR' : [
+      \     '$VIMRUNTIME/**',
+      \     '~/.vim/**',
+      \     '$VIM/.vim/**',
+      \     '$VIM/vimfiles/**',
+      \   ],
+      \ }
+let g:FuzzyFinderOptions.MruFile.max_item = 200
+let g:FuzzyFinderOptions.MruCmd.max_item = 200
+nnoremap <silent> <C-n>      :FuzzyFinderBuffer<CR>
 
 " =============================================
-" Custon functions
+" Custom functions
 " =============================================
-function! LoadTags(tagfile)
-    execute "set tags=~/.vim/tags/" . a:tagfile
-endfunction
 
-" Set tabstop, softtabstop and shiftwidth to the same value
-command! -nargs=* Stab call Stab()
-function! Stab()
-    let l:tabstop = 1 * input('set tabstop = softtabstop = shiftwidth = ')
-    if l:tabstop > 0
-        let &l:sts = l:tabstop
-        let &l:ts = l:tabstop
-        let &l:sw = l:tabstop
-    endif
-    call SummarizeTabs()
-endfunction
+" =============================================
+" Personal Preferences
+" =============================================
 
-function! SummarizeTabs()
-    try
-        echohl ModeMsg
-        echon 'tabstop='.&l:ts
-        echon ' shiftwidth='.&l:sw
-        echon ' softtabstop='.&l:sts
-        if &l:et
-            echon ' expandtab'
-        else
-            echon ' noexpandtab'
-        endif
-    finally
-        echohl None
-    endtry
-endfunction
+" Map Shift-Space to Esc to switch modes
+inoremap <S-Space> <Esc>
+nnoremap <S-Space> <Esc>
 
-function! Preserve(command)
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    execute a:command
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
+" Show vertical line length 'soft' limits
+if exists('+colorcolumn')
+    set colorcolumn=80,120
+    hi ColorColumn ctermbg=232 guibg=#220000
+endif
 
-function! Scratch()
-    " Set buffer as a scratch buffer
-    set buftype=nofile
-    set bufhidden=hide
-    setlocal noswapfile
-endfunction
-
-nmap <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
-nmap <leader>= :call Preserve("normal gg=G")<CR>
