@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG_DIR="$HOME/src/github.com/tavisto/dotfiles"
+CONFIG_DIR="$HOME/src/dotfiles"
 
 while getopts "bc" flag
 do
