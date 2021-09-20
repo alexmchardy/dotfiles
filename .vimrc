@@ -27,8 +27,8 @@ set encoding=utf-8
 " Set the background to dark
 set background=dark
 
-colorscheme gotham
-"color pablo
+"colorscheme gotham
+color pablo
 hi MatchParen term=reverse ctermbg=blue
 
 " Highlight while searching
