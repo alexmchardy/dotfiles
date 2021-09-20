@@ -1,0 +1,26 @@
+#!/bin/bash
+
+echo "watching..."
+
+if [[ -z $1 ]]; then
+    echo 'please specify a source path'
+    exit 1
+fi
+
+if [[ -z $2 ]]; then
+    echo 'please specify a destination path'
+    exit 1
+fi
+
+if [[ ! -d "$1" ]]; then
+    echo "source path does not exist"
+    exit 1
+fi
+
+srcpath=$1
+destpath=$2
+
+echo $1
+
+ulimit -n 10000
+fsmonitor -s -d $srcpath '!*.swp' '!.git' '!.idea' '!node_modules' '!vendor' '!bower_components' '!tmp' syncit $srcpath $destpath

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+yellow=`echo -e '\033[1;33m'`
+blue=`echo -e '\033[1;34m'`
+NC=`echo -e '\033[0m'` # No color
+printf "syncing... ${yellow}(%s)${NC}\n" "`date`"
+
+if [[ -z $1 ]]; then
+    echo 'please specify a source path'
+    exit 1
+fi
+
+if [[ -z $2 ]]; then
+    echo 'please specify a destination path'
+    exit 1
+fi
+
+if [[ ! -d "$1" ]]; then
+    echo "source path does not exist"
+    exit 1
+fi
+
+# rsync needs the trailing slash in srcpath
+srcpath=${1%/}/
+destpath=${2%/}
+
+#srcprefix="/Users/amchardy/src"
+#destprefix="/home/amchardy/vhost/www"
+#desthost="dev-footage01.us-east-1.shuttercorp.net"
+
+#echo $1
+
+#rsync -r -a -v -z --links --stats --human-readable --delete -f"- .git/" --exclude="*.swp" $srcprefix/$1/ $USER@$desthost:$destprefix
+(rsync -r -a -v -z --links --stats --human-readable --delete --exclude=".git" --exclude=".idea" --exclude="*.swp" --exclude="tmp" --exclude="bower_components" $srcpath $destpath | sed -e "s/^building file list.*/&${blue}/" -e "s/^Number of files.*/${NC}&/") && \
+afplay "/System/Library/Sounds/Pop.aiff" || \
+afplay "/System/Library/Sounds/Basso.aiff"
