@@ -1,6 +1,7 @@
 syntax: glob
 .vim/tags*
 .vim/.*
+.vim/bundle/
 *.pyc
 *.project
 *.swp
