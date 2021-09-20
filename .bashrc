@@ -70,20 +70,17 @@ function load_darwin {
   alias ls='ls -G'
   alias screen="export SCREENPWD=$(pwd); /usr/bin/screen"
 
-  export BREW_PATH="/usr/local";
+  export BREW_PATH="/opt/homebrew";
   if [ -d $BREW_PATH ]; then
     # Homebrew path
-    prepend_path "$BREW_PATH/bin"
-    prepend_path "$BREW_PATH/sbin"
-
-
-    if [ -d "$BREW_PATH/opt/ruby" ]; then
-      prepend_path "$BREW_PATH/opt/ruby/bin"
-      export MANPATH=$BREW_PATH/opt/ruby/share/man:$MANPATH
-    fi
+    # prepend_path "$BREW_PATH/bin"
+    #prepend_path "$BREW_PATH/sbin"
 
     # Add homebrew path to the manpath
-    export MANPATH=$BREW_PATH/share/man:$MANPATH
+    # export MANPATH=$BREW_PATH/share/man:$MANPATH
+
+    # Export Homebrew env vars
+    eval "$($BREW_PATH/bin/brew shellenv)"
   fi
 
 
