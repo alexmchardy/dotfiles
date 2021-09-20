@@ -66,6 +66,8 @@ esac
 
 function load_darwin {
   export PLATFORM='darwin'
+  # Suppress zsh warning
+  export BASH_SILENCE_DEPRECATION_WARNING=1
   # Fix screen
   alias ls='ls -G'
   alias screen="export SCREENPWD=$(pwd); /usr/bin/screen"
