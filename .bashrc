@@ -46,19 +46,46 @@ my_time() {
 
 prepend_path "$HOME/bin"
 
-function _update_ps1() {
-      PS1="\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
-}
+########################
+# Command Prompt
+########################
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-  xterm*|rxvt*)
-    PROMPT_COMMAND='_update_ps1; echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-    ;;
-  *)
-    PROMPT_COMMAND='_update_ps1;'
-    ;;
-esac
+function prompt_command {
+    local max_pwd_length=30
+    local max_screen_pwd_length=18
+    local pwd_length=$(echo -n $PWD | wc -c | tr -d " ")
+    if [ $pwd_length -gt $max_pwd_length ]
+    then
+        shortPWD="--$(echo -n $PWD | sed -e "s/.*\(.\{$max_pwd_length\}\)/\1/")"
+    else
+        shortPWD="$(echo -n $PWD)"
+    fi
+    if [ $pwd_length -gt $max_screen_pwd_length ]
+    then
+        screenPWD="<$(echo -n $PWD | sed -e "s/.*\(.\{$max_screen_pwd_length\}\)/\1/")"
+    else
+        screenPWD="$(echo -n $PWD)"
+    fi
+
+    # If this is an xterm set the title to user@host:dir
+    case "$TERM" in
+    xterm*|rxvt*)
+        echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"
+        ;;
+    screen)
+        echo -ne "^[k$screenPWD^[\\"
+        ;;
+    *)
+        ;;
+    esac
+
+    # Get the git branch of this dir
+    gitbranch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+}
+PROMPT_COMMAND=prompt_command
+
+# <git branch>:<truncated working dir>$
+PS1='\[\033[01;93m\]${gitbranch}:\[\033[01;96m\]${shortPWD}\[\033[00m\]\$ '
 
 ###############################################################################
 # OS specific settings
