@@ -1,23 +1,8 @@
 syntax: glob
 .vim/tags*
 .vim/.*
-.vim/view
-.vim/view/.*
-.vim/undodir/*
-.vim/backupdir/*
-.vim/sessions/*
-.vim/dbext_sql_history.sql
 *.pyc
 *.project
-*.buildpath
-*.project
-*.settings*
-*.egg*
-*build*
 *.swp
 .DS_Store
-bin/*bot
-bin/composer
-bin/composer.phar
-.siege/cookies.txt
 .local_config/
