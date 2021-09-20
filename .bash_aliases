@@ -17,4 +17,4 @@ alias myip='http https://ifconfig.co/json | jq .'
 # Alias git to hub
 eval "$(hub alias -s)"
 
-alias useful='cat ~/local/src/useful.sh'
+alias useful='cat ~useful ~/local/useful'

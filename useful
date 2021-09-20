@@ -1,0 +1,32 @@
+#!/bin/bash
+
+####### Optimize pngs
+# pngcrush seems to usually do the best job
+pngcrush -d crushed *.png
+pngcrush infile.png outfile.png
+# optipng sometimes does better
+optipng -dir optipnged *.png
+optipng -o7 -zm1-9 -out outfile.png infile.png
+# base64 encode an image, copying results into clipboard for pasting into CSS
+base64 <example.png |tr -d '\n' |pbcopy
+
+####### URL encode/decode
+echo 'foo/bar' | php -R 'echo urldecode($argn);'
+
+###### Recurse through a dir finding files (images) not used in the codebase (i.e. not found by git grep)
+for i in `ls -1Rp assets/images/icons | grep -v '/'`; do git grep -qF $i; if [ $? -eq 1 ]; then echo $i; fi; done
+
+### Turn off php error reporting in dev
+sed -i -e 's/E_ALL ^ E_STRICT/E_ERROR/' www/index.php
+
+### Convert file to MP3
+ffmpeg -i input.wav -codec:a libmp3lame -qscale:a 3 output.mp3
+
+## Run a flaky test until it fails
+while [ "$?" -eq 0 ]; do BABEL_ENV=test NODE_ENV=${NODE_ENV:-dev} mocha --timeout 10000 --require babel-register  --grep hoursMinutes test/unit/server/helpers/filters.js; done;
+
+## list all untracked files in git (for example to remove them)
+git ls-files --others --exclude-standard
+
+## remove newline from eof of modified files (sed appends newline to end of files)
+git ls-files --modified public/static | xargs perl -pi -e 'chomp if eof'
