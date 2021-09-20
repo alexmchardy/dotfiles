@@ -17,6 +17,10 @@
 #caption always "%{= kg}[%=%{= kw}%?%-w%{R}(%n*%t)%?%+w%{= kg}%=]"
 caption always "%{= kw} %{G}[%=%{y}%?%-w%{R}(%{R}%n %{R}%t%{R})%{y}%?%+w%=%{G}] "
 
+# window list with current window highlighted, time and date
+#hardstatus alwayslastline
+#hardstatus string '%{= ky}%-Lw%{= Ky}%50>%n %t%{= ky}%+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}'
+
 # Mininal hardstatus line (print in xterm header w/o color)
 #hardstatus always lastline
 #hardstatus string "[%=%?%-w(%n %t)%?%+w%=]"
@@ -29,6 +33,9 @@ autodetach on
 
 # Use a 30000-line scrollback buffer 
 defscrollback 30000
+
+# ignore case when searching scrollback
+ignorecase on
 
 # Turn on visual bell
 vbell off 
@@ -49,6 +56,9 @@ termcapinfo xterm* ti@:te@
 ## Key Bindings
 ############################################################################
 bind ' ' windowlist -b
+
+# Can't remember what this is
+bindkey -k kD stuff \177
 
 ############################################################################
 ## Screens
