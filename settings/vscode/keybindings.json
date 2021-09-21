@@ -1,0 +1,15 @@
+// Place your key bindings in this file to overwrite the defaults
+[{
+    "key": "shift+space",
+    "command": "extension.vim_escape",
+    "when": "editorTextFocus && vim.active && !inDebugRepl"
+},
+{
+    "key": "cmd+shift+l",
+    "command": "macros.console_log_it"
+},
+{
+    "key": "shift+cmd+k shift+cmd+f",
+    "command": "eslint.executeAutofix"
+}
+]

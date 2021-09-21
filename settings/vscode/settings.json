@@ -1,0 +1,44 @@
+{
+    "editor.fontFamily": "Hasklig, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "vim.disableAnnoyingNeovimMessage": true,
+    "search.useIgnoreFilesByDefault": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.rulers": [
+        100
+    ],
+    "editor.tabSize": 2,
+    "editor.scrollBeyondLastLine": false,
+    "editor.minimap.maxColumn": 30,
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.enabled": false,
+    "workbench.editor.enablePreview": true,
+    "telemetry.enableTelemetry": false,
+    "gitlens.keymap": "chorded",
+    "gitlens.advanced.messages": {
+        "suppressGitVersionWarning": true,
+        "suppressShowKeyBindingsNotice": true
+    },
+    "editor.snippetSuggestions": "top",
+    "macros": {
+        "console_log_it": [
+            "editor.action.addSelectionToNextFindMatch",
+            "editor.action.clipboardCopyAction",
+            "editor.action.insertLineAfter",
+            {
+                "command": "editor.action.insertSnippet",
+                "args": {
+                    "langId": "javascript",
+                    "name": "console_log_clipboard"
+                }
+            }
+        ]
+    },
+    "breadcrumbs.enabled": true,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.statusBar.enabled": false,
+    "eslint.packageManager": "yarn",
+    "editor.codeLens": false,
+    "typescript.autoClosingTags": false,
+    "workbench.colorTheme": "Hopscotch (TextMate)"
+}
