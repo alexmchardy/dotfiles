@@ -185,6 +185,10 @@ esac
 
 bind "set completion-ignore-case on"
 
+# Setup n (node version manager)
+export N_PREFIX=/opt/n
+prepend_path "$N_PREFIX/bin"
+
 ## Set up yarn if installed
 if [[ -d $HOME/.yarn ]];
 then
@@ -201,9 +205,9 @@ fi
 ################################################################################
 
 # Load local configuration settings
-if [ -f "$HOME/.bash_local" ]; then
+if [ -f "$HOME/.local_config/.bash_local" ]; then
   echo Loading local settings
-  . "$HOME/.bash_local"
+  . "$HOME/.local_config/.bash_local"
 fi
 
 ################################################################################
