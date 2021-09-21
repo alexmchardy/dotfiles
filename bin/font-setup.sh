@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+echo "This script needs to be run with sudo"
+
+FONTS_DIR="$HOME/settings/fonts/Fonts"
+FONT_COLLECTIONS_DIR="$HOME/settings/fonts/FontCollections"
+
+if [ -d "$FONTS_DIR" ]; then
+
+    if [ -n "$(ls -A $HOME/Library/Fonts 2>/dev/null)" ]; then
+      echo "$HOME/Library/Fonts directory is not empty. Not linking $FONTS_DIR."
+    else
+      echo "Linking $FONTS_DIR to $HOME/Library/Fonts"
+
+      ln -sF $FONTS_DIR $HOME/Library
+
+      echo "Setting $HOME/Library/Fonts permissions to 700"
+
+      chmod 700 $HOME/Library/Fonts
+    fi
+fi
+
+if [ -d "$FONT_COLLECTIONS_DIR" ]; then
+    echo "Linking files from $FONT_COLLECTIONS_DIR into $HOME/Library/FontCollections"
+
+    ln -s $FONT_COLLECTIONS_DIR/* $HOME/Library/FontCollections
+fi
+
