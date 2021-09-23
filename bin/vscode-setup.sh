@@ -4,6 +4,8 @@ VSCODE=$(which code)
 VSCODE_USER_SETTINGS_DIR="$HOME/Library/Application Support/Code/User"
 if [ -f $VSCODE ] && [ -d "$VSCODE_USER_SETTINGS_DIR" ]; then
     echo "Installing extensions"
+
+    # extensions list created with `code --list-extensions`
     extensions=`cat $HOME/settings/vscode/extensions_list`
     for extension in $extensions
     do
@@ -22,7 +24,7 @@ if [ -f $VSCODE ] && [ -d "$VSCODE_USER_SETTINGS_DIR" ]; then
       mv "$settings" "$settings.bak"
     fi
 
-    echo "Copying keybindings and settings"
-    cp $HOME/settings/vscode/keybindings.json "$keybindings"
-    cp $HOME/settings/vscode/settings.json "$settings"
+    echo "Linking keybindings and settings"
+    ln -s $HOME/settings/vscode/keybindings.json "$keybindings"
+    ln -s $HOME/settings/vscode/settings.json "$settings"
 fi
