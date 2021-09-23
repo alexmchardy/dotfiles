@@ -24,7 +24,8 @@ if [ -f $VSCODE ] && [ -d "$VSCODE_USER_SETTINGS_DIR" ]; then
       mv "$settings" "$settings.bak"
     fi
 
-    echo "Linking keybindings and settings"
+    echo "Linking keybindings, settings, and snippets"
     ln -s $HOME/settings/vscode/keybindings.json "$keybindings"
     ln -s $HOME/settings/vscode/settings.json "$settings"
+    ln -sF "$HOME/settings/vscode/snippets" "$VSCODE_USER_SETTINGS_DIR"
 fi
