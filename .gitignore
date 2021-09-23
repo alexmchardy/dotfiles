@@ -8,3 +8,6 @@ syntax: glob
 .DS_Store
 .local_config/
 local/
+
+# git ci symlink
+bin/git-checkout-interactive
