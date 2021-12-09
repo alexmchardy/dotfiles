@@ -11,5 +11,13 @@
 {
     "key": "shift+cmd+k shift+cmd+f",
     "command": "eslint.executeAutofix"
+},
+{
+    "key": "ctrl+shift+cmd+[",
+    "command": "workbench.action.openPreviousRecentlyUsedEditor"
+},
+{
+    "key": "ctrl+shift+cmd+]",
+    "command": "workbench.action.openNextRecentlyUsedEditor"
 }
 ]

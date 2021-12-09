@@ -19,7 +19,7 @@
         "suppressGitVersionWarning": true,
         "suppressShowKeyBindingsNotice": true
     },
-    "editor.snippetSuggestions": "top",
+    "editor.snippetSuggestions": "bottom",
     "macros": {
         "console_log_it": [
             "editor.action.addSelectionToNextFindMatch",
@@ -39,5 +39,7 @@
     "gitlens.statusBar.enabled": false,
     "eslint.packageManager": "yarn",
     "editor.codeLens": false,
-    "typescript.autoClosingTags": false
+    "typescript.autoClosingTags": false,
+    "editor.accessibilitySupport": "off",
+    "emmet.showSuggestionsAsSnippets": true
 }
