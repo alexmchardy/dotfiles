@@ -119,3 +119,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -int 
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int 1
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerSwipeGesture -int 1
+
+# Enable Ctrl-scroll to zoom, with full-screen zoom mode
+defaults write com.apple.universalaccess closeViewScrollWheelToggle -int 1
+defaults write com.apple.universalaccess closeViewZoomMode -int 0
