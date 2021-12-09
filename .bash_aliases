@@ -14,6 +14,8 @@ alias la='ls -A'
 alias tree='tree -C'
 alias myip='http https://ifconfig.co/json | jq .'
 
+alias json='jq .'
+
 # Alias git to hub
 eval "$(which hub &>/dev/null && hub alias -s)"
 
