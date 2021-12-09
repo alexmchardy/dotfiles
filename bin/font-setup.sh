@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-echo "This script needs to be run with sudo"
+if [ "$USER" != "root" ]; then
+  echo "This script needs to be run with sudo"
+  exit 1;
+fi
+
+NON_ROOT_USER=$SUDO_USER
 
 FONTS_DIR="$HOME/settings/fonts/Fonts"
 FONT_COLLECTIONS_DIR="$HOME/settings/fonts/FontCollections"
@@ -14,8 +19,9 @@ if [ -d "$FONTS_DIR" ]; then
 
       ln -sF $FONTS_DIR $HOME/Library
 
-      echo "Setting $HOME/Library/Fonts permissions to 700"
+      echo "Setting $HOME/Library/Fonts owner and permissions"
 
+      chown -h $NON_ROOT_USER $HOME/Library/Fonts
       chmod 700 $HOME/Library/Fonts
     fi
 fi
