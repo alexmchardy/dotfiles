@@ -1,14 +1,17 @@
 bash
 bash-completion2
 curl
+homebrew/cask/docker
 fswatch
 fzf
 git
 hub
 iterm2
 jq
+lynx
 markdown
 n
+neovim
 postman
 python
 rectangle
