@@ -30,8 +30,8 @@
 	ghp = subtree push --prefix _gh_pages origin gh-pages
 	coma = commit --amend --no-edit
 	rebcon = rebase --continue
-	fetum = fetch upstream master
-	rebum = rebase upstream/master
+	fetum = fetch upstream main
+	rebum = rebase upstream/main
 [merge]
   tool = vscode
 [mergetool "vscode"]
