@@ -39,7 +39,11 @@
     "gitlens.statusBar.enabled": false,
     "eslint.packageManager": "yarn",
     "editor.codeLens": false,
-    "typescript.autoClosingTags": false,
     "editor.accessibilitySupport": "off",
-    "emmet.showSuggestionsAsSnippets": true
+    "emmet.showSuggestionsAsSnippets": true,
+    "extensions.ignoreRecommendations": true,
+    "openInGitHub.defaultPullRequestBranch": "main",
+    "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+    "typescript.autoClosingTags": false,
+    "javascript.preferences.quoteStyle": "single"
 }

@@ -30,3 +30,6 @@ git ls-files --others --exclude-standard
 
 ## remove newline from eof of modified files (sed appends newline to end of files)
 git ls-files --modified public/static | xargs perl -pi -e 'chomp if eof'
+
+## vscodevim not initializing in some workspaces? clear workspace storage
+rm -r Library/Application\ Support/Code/User/workspaceStorage/*
